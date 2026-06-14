@@ -191,10 +191,10 @@ export function VocalTab({ onBackToChat }: VocalTabProps) {
           {/* Stop Session & Return to Chat */}
           <button
             onClick={onBackToChat}
-            className="w-14 h-14 rounded-full bg-rose-500/10 border-2 border-rose-500 flex items-center justify-center hover:bg-rose-500/20 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all active:scale-95 group"
+            className="w-14 h-14 rounded-full bg-rose-500/10 border-2 border-rose-500 flex items-center justify-center hover:bg-rose-500/20 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all duration-300 active:scale-95"
             title="Arrêter la session"
           >
-            <Power className="w-5 h-5 text-rose-500 group-hover:scale-110 transition-transform" />
+            <Power className="w-5 h-5 text-rose-500" />
           </button>
 
           {/* Toggle speaker state */}

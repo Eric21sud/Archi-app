@@ -10,10 +10,26 @@ import { MemoireTab } from './components/MemoireTab';
 import { ProjetsTab } from './components/ProjetsTab';
 import { PlusTab } from './components/PlusTab';
 import { ControlCenter, ArchibaldState } from './components/ControlCenter';
+import { Onboarding } from './components/Onboarding';
 import { Chat, Message } from './types';
 
 export default function App() {
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const [activeTab, setActiveTab] = useState<string>("chat");
+
+  useEffect(() => {
+    // Check if user has completed onboarding
+    const hasSeenOnboarding = localStorage.getItem('archibald_onboarding_completed');
+    if (!hasSeenOnboarding) {
+      setShowOnboarding(true);
+    }
+  }, []);
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem('archibald_onboarding_completed', 'true');
+    setShowOnboarding(false);
+  };
+
   const [isThinking, setIsThinking] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -237,6 +253,10 @@ export default function App() {
   };
 
   const hologramStatus = archiState === 'listening' ? 'listening' : (archiState === 'idle' ? 'idle' : 'thinking');
+
+  if (showOnboarding) {
+    return <Onboarding onComplete={handleOnboardingComplete} />;
+  }
 
   return (
     <div className="relative w-full h-full flex flex-col bg-bg-dark font-sans overflow-hidden">
